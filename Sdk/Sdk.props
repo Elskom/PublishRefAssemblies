@@ -23,7 +23,7 @@
       <PackagePath>ref/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
     <!-- Add documentation file to each of the reference assembly paths. -->
-    <TfmSpecificPackageFile Include="$(OutputPath)/$(ProjectName).xml" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
+    <TfmSpecificPackageFile Include="$(DocumentationFile)" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
       <PackagePath>ref/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
   </ItemGroup>
