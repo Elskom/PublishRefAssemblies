@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+
+  <PropertyGroup>
+    <!-- Default these to true. -->
+    <ProduceReferenceAssembly Condition="'$(ProduceReferenceAssembly)' == ''">true</ProduceReferenceAssembly>
+    <PublishReferenceAssemblies Condition="'$(PublishReferenceAssemblies)' == '' AND '$(ProduceReferenceAssembly)' == 'true'">true</PublishReferenceAssemblies>
+    <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+    <PublishDocumentationFile Condition="'$(PublishDocumentationFile)' == '' AND '$(GenerateDocumentationFile)' == 'true'">true</PublishDocumentationFile>
+    <!--
+        Sorry, we have to disable the warning for adding the reference assemblies to the package without adding them to the nuspec.
+        This is because of the fact that if we use the methods to add them that does add them to the nuspec, then the folder paths
+        would be added automatically to the project which is not intended at all or even wanted. As such for now the only way to
+        fix that is to disable package analysis for now.
+    -->
+    <NoPackageAnalysis Condition="'$(PublishReferenceAssemblies)' == 'true'">true</NoPackageAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Add reference binaries. -->
+    <TfmSpecificPackageFile Include="$(OutputPath)/ref/" Condition="'$(PublishReferenceAssemblies)' == 'true'>
+      <PackagePath>ref/$(TargetFramework)</PackagePath>
+    </TfmSpecificPackageFile>
+    <!-- Add documentation file to each of the reference assembly paths. -->
+    <TfmSpecificPackageFile Include="$(OutputPath)/$(ProjectName).xml" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
+      <PackagePath>ref/$(TargetFramework)</PackagePath>
+    </TfmSpecificPackageFile>
+  </ItemGroup>
+
+</Project>

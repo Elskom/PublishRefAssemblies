@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.0.0">
+
+  <PropertyGroup>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\artifacts\</PackageOutputPath>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Company>Els_kom org.</Company>
+    <Authors>Els_kom org.</Authors>
+    <PackageProjectUrl>https://github.com/Elskom/PublishRefAssemblies/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Elskom/PublishRefAssemblies/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>PublishRefAssemblies.Sdk</PackageTags>
+    <Copyright>Copyright (c) 2021</Copyright>
+    <Description>SDK to automatically add Reference Assemblies to your nuget packages.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../Sdk/Sdk.props" Pack="true" PackagePath="Sdk" />
+    <None Include="../Sdk/Sdk.targets" Pack="true" PackagePath="Sdk" />
+  </ItemGroup>
+
+</Project>
