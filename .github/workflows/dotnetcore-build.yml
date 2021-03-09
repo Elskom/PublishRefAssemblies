@@ -1,4 +1,4 @@
-name: .NET Core (build & publish pre-release)
+name: .NET Core (build)
 
 on:
   push:

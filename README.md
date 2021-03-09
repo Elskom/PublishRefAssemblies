@@ -10,7 +10,7 @@ SDK to automatically add Reference Assemblies to your nuget packages.
 
 ## Build Status
 
-![Build Status](https://github.com/Elskom/PublishRefAssemblies/workflows/.NET%20Core%20%28build%20%26%20publish%20pre-release%29/badge.svg)
+![Build Status](https://github.com/Elskom/PublishRefAssemblies/workflows/.NET%20Core%20%28build%29/badge.svg)
 ![Build Status](https://github.com/Elskom/PublishRefAssemblies/workflows/.NET%20Core%20%28build%20%26%20publish%20release%29/badge.svg)
 ![Build Status](https://github.com/Elskom/PublishRefAssemblies/workflows/.NET%20Core%20%28build%20pull%20request%29/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/Elskom/PublishRefAssemblies.svg)](https://GitHub.com/Elskom/PublishRefAssemblies/releases/)

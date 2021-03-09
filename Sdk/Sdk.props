@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <!-- Add reference binaries. -->
-    <TfmSpecificPackageFile Include="$(OutputPath)/ref/" Condition="'$(PublishReferenceAssemblies)' == 'true'>
+    <TfmSpecificPackageFile Include="$(OutputPath)/ref/" Condition="'$(PublishReferenceAssemblies)' == 'true'">
       <PackagePath>ref/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
     <!-- Add documentation file to each of the reference assembly paths. -->
