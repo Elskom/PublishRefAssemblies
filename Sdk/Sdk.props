@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!--
+***********************************************************************************************
+Sdk.props
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+Copyright (c) Els_kom org. All rights reserved.
+***********************************************************************************************
+-->
+<Project>
+
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
@@ -20,11 +29,13 @@
   <ItemGroup>
     <!-- Add reference binaries. -->
     <TfmSpecificPackageFile Include="$(OutputPath)/ref/" Condition="'$(PublishReferenceAssemblies)' == 'true'">
-      <PackagePath>ref/$(TargetFramework)</PackagePath>
+      <PackagePath Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)$(TargetPlatformVersion)</PackagePath>
+      <PackagePath Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
     <!-- Add documentation file to each of the reference assembly paths. -->
     <TfmSpecificPackageFile Include="$(DocumentationFile)" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
-      <PackagePath>ref/$(TargetFramework)</PackagePath>
+      <PackagePath Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)$(TargetPlatformVersion)</PackagePath>
+      <PackagePath Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
   </ItemGroup>
 

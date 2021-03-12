@@ -3,8 +3,8 @@
   <PropertyGroup>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <TargetFramework>net5.0</TargetFramework>
-    <PackageReleaseNotes>Use the path of DocumentationFile path property for publishing documentations for every ref assembly.</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Filter for unversioned platform specific target frameworks and then use default version when packaging them. Versioned ones should work just like non-platform specific target frameworks.</PackageReleaseNotes>
+    <Version>1.0.3</Version>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\artifacts\</PackageOutputPath>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
