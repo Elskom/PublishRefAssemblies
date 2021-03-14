@@ -28,7 +28,7 @@ The actual result.
 If applicable, add screenshots to help explain your problem.
 
 **Version used**
-The version affected by this issue (Can also be "master" for code in latest master branch but reference commit then if possible).
+The version affected by this issue (Can also be "main" for code in latest main branch but reference commit then if possible).
 
 **Additional context**
 Add any other context about the problem here.
