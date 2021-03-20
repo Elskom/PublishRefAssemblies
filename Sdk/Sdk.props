@@ -9,7 +9,7 @@ Copyright (c) Els_kom org. All rights reserved.
 -->
 <Project>
 
-  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" Condition="'$(UsingMicrosoftNETSdk)' == ''" />
 
   <PropertyGroup>
     <!-- Default these to true. -->
@@ -17,26 +17,23 @@ Copyright (c) Els_kom org. All rights reserved.
     <PublishReferenceAssemblies Condition="'$(PublishReferenceAssemblies)' == '' AND '$(ProduceReferenceAssembly)' == 'true'">true</PublishReferenceAssemblies>
     <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
     <PublishDocumentationFile Condition="'$(PublishDocumentationFile)' == '' AND '$(GenerateDocumentationFile)' == 'true'">true</PublishDocumentationFile>
-    <!--
-        Sorry, we have to disable the warning for adding the reference assemblies to the package without adding them to the nuspec.
-        This is because of the fact that if we use the methods to add them that does add them to the nuspec, then the folder paths
-        would be added automatically to the project which is not intended at all or even wanted. As such for now the only way to
-        fix that is to disable package analysis for now.
-    -->
-    <NoPackageAnalysis Condition="'$(PublishReferenceAssemblies)' == 'true'">true</NoPackageAnalysis>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- Add reference binaries. -->
-    <TfmSpecificPackageFile Include="$(OutputPath)/ref/" Condition="'$(PublishReferenceAssemblies)' == 'true'">
+    <None Include="$(OutputPath)/ref/$(AssemblyName).dll" Pack="true" Visible="false" Condition="'$(PublishReferenceAssemblies)' == 'true'">
+      <Link Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">$(AssemblyName)-ref-$(TargetFramework)$(TargetPlatformVersion).dll</Link>
+      <Link Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">$(AssemblyName)-ref-$(TargetFramework).dll</Link>
       <PackagePath Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)$(TargetPlatformVersion)</PackagePath>
       <PackagePath Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)</PackagePath>
-    </TfmSpecificPackageFile>
+    </None>
     <!-- Add documentation file to each of the reference assembly paths. -->
-    <TfmSpecificPackageFile Include="$(DocumentationFile)" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
+    <None Include="$(DocumentationFile)" Pack="true" Visible="false" Condition="'$(PublishReferenceAssemblies)' == 'true' AND '$(PublishDocumentationFile)' == 'true'">
+      <Link Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">$(AssemblyName)-ref-$(TargetFramework)$(TargetPlatformVersion).xml</Link>
+      <Link Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">$(AssemblyName)-ref-$(TargetFramework).xml</Link>
       <PackagePath Condition="$(TargetFramework.EndsWith('-windows')) OR $(TargetFramework.EndsWith('-android')) OR $(TargetFramework.EndsWith('-ios')) OR $(TargetFramework.EndsWith('-macos')) OR $(TargetFramework.EndsWith('-tvos')) OR $(TargetFramework.EndsWith('-watchos')) OR $(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)$(TargetPlatformVersion)</PackagePath>
       <PackagePath Condition="!$(TargetFramework.EndsWith('-windows')) AND !$(TargetFramework.EndsWith('-android')) AND !$(TargetFramework.EndsWith('-ios')) AND !$(TargetFramework.EndsWith('-macos')) AND !$(TargetFramework.EndsWith('-tvos')) AND !$(TargetFramework.EndsWith('-watchos')) AND !$(TargetFramework.EndsWith('-maccatalyst'))">ref/$(TargetFramework)</PackagePath>
-    </TfmSpecificPackageFile>
+    </None>
   </ItemGroup>
 
 </Project>
