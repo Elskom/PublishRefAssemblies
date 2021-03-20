@@ -17,10 +17,13 @@ jobs:
     - name: .NET core build
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.100-preview.1.21103.13
+        dotnet-version: 6.0.100-preview.2.21155.3
     - name: Restore
-      run: dotnet restore
+      run: |
+        dotnet nuget add source "https://api.nuget.org/v3/index.json" --name "nuget.org"
+        dotnet restore
       shell: bash
+
     - name: Build with dotnet
       run: |
         dotnet build --configuration Release --no-restore
